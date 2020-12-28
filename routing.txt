@@ -1,0 +1,41 @@
+Pipeline(config)#ip route 0.0.0.0 0.0.0.0 182.97.6.217
+Estate(config)#ip route 0.0.0.0 0.0.0.0 182.97.6.221
+KillHouse(config)#ip route 0.0.0.0 0.0.0.0 182.97.6.229
+BusStation(config)#ip route 0.0.0.0 0.0.0.0 182.97.6.225
+
+Backup(config)#ip route 182.97.6.0 255.255.255.128 Serial0/3/1
+Backup(config)#ip route 182.97.6.128 255.255.255.192 Serial0/3/1
+Backup(config)#ip route 182.97.5.0 255.255.255.0 Serial0/3/0
+Backup(config)#ip route 182.97.0.0 255.255.254.0 Serial0/0/1
+Backup(config)#ip route 182.97.6.192 255.255.255.240 Serial0/0/1
+Backup(config)#ip route 182.97.4.0 255.255.255.0 Serial0/0/0
+Backup(config)#ip route 182.97.2.0 255.255.254.0 Serial0/0/0
+
+Pipeline(config)#ip route 182.97.4.0 255.255.255.0 Serial0/1/0
+Pipeline(config)#ip route 182.97.2.0 255.255.254.0 Serial0/1/0
+Pipeline(config)#ip route 182.97.0.0 255.255.254.0 Serial0/1/0
+Pipeline(config)#ip route 182.97.6.192 255.255.255.240 Serial0/1/0
+Pipeline(config)#ip route 182.97.5.0 255.255.255.0 182.97.6.213
+Pipeline(config)#ip route 182.97.5.0 255.255.255.0 182.97.6.217 5 (Floating)
+
+KillHouse(config)#ip route 182.97.6.192 255.255.255.240 Serial0/3/0
+KillHouse(config)#ip route 182.97.0.0 255.255.254.0 Serial0/3/0
+KillHouse(config)#ip route 182.97.6.0 255.255.255.128 Serial0/2/0
+KillHouse(config)#ip route 182.97.6.128 255.255.255.192 Serial0/2/0
+KillHouse(config)#ip route 182.97.5.0 255.255.255.0 Serial0/2/0
+
+BusStation(config)#ip route 182.97.4.0 255.255.255.0 Serial0/2/0
+BusStation(config)#ip route 182.97.2.0 255.255.254.0 Serial0/2/0
+BusStation(config)#ip route 182.97.5.0 255.255.255.0 Serial0/2/1
+BusStation(config)#ip route 182.97.6.0 255.255.255.128 Serial0/2/1
+BusStation(config)#ip route 182.97.6.128 255.255.255.192 Serial0/2/1
+
+Estate(config)#router rip
+Estate(config-router)#version 2
+Estate(config-router)#no auto-summary
+Estate(config-router)#network 182.97.6.0
+Estate(config-router)#network 182.97.6.128
+Estate(config-router)#network 182.97.4.0
+Estate(config-router)#network 182.97.2.0
+Estate(config-router)#network 182.97.0.0
+Estate(config-router)#network 182.97.6.192

@@ -1,0 +1,87 @@
+Router>en
+Router#conf t
+Router(config)#hostname KillHouse
+KillHouse(config)#interface FastEthernet0/0
+KillHouse(config-if)#ip address 182.97.2.1 255.255.254.0
+KillHouse(config)#interface FastEthernet0/1
+KillHouse(config-if)#ip address 182.97.4.1 255.255.255.0
+KillHouse(config-if)#no shut
+KillHouse(config)#Interface  Serial0/2/0
+KillHouse(config-if)#ip address 182.97.6.230 255.255.255.252
+KillHouse(config-if)#no shut
+KillHouse(config)#Interface Serial0/3/0
+KillHouse(config-if)#ip address 182.97.6.209 255.255.255.252
+KillHouse(config-if)#no shut
+KillHouse(config-if)#exit
+
+Router(config)#hostname BusStation
+BusStation(config)#interface Serial0/2/1
+BusStation(config-if)#ip address 182.97.6.226 255.255.255.252
+BusStation(config-if)#no shut
+BusStation(config-if)#exit
+BusStation(config)#Interface Serial0/2/0
+BusStation(config-if)#ip address 182.97.6.210 255.255.255.252
+BusStation(config-if)#no shut
+BusStation(config-if)#exit
+BusStation(config)#interface FastEthernet0/1
+BusStation(config-if)#ip address 182.97.6.193 255.255.255.240
+BusStation(config-if)#no shut
+BusStation(config-if)#exit
+
+Router>en
+Router#conf t
+Router(config)#hostname Pipeline
+Pipeline(config)#Interface Serial0/0/0
+Pipeline(config-if)#ip address 182.97.6.214 255.255.255.252
+Pipeline(config-if)#no shut
+Pipeline(config-if)#exit
+Pipeline(config)#Interface Serial0/1/0
+Pipeline(config-if)#ip address 182.97.6.218 255.255.255.252
+Pipeline(config-if)#no shut
+Pipeline(config-if)#exit
+Pipeline(config)#Interface FastEthernet0/1
+Pipeline(config-if)#ip address 182.97.6.129 255.255.255.192
+Pipeline(config-if)#no shut
+Pipeline(config-if)#exit
+Pipeline(config)#Interface FastEthernet0/0
+Pipeline(config-if)#ip address 182.97.6.1 255.255.255.128
+Pipeline(config-if)#no shut
+Pipeline(config-if)#exit
+Pipeline(config)#
+
+Router>en
+Router#conf t
+Router(config)#hostname Estate
+Estate(config)#Interface FastEthernet0/1
+Estate(config-if)#ip address 182.97.5.1 255.255.255.0
+Estate(config-if)#no shut
+Estate(config-if)#exit
+Estate(config)#Interface Serial0/2/0
+Estate(config-if)#ip address 182.97.6.213 255.255.255.252
+Estate(config-if)#no shut
+Estate(config-if)#exit
+Estate(config)#Interface Serial0/2/1
+Estate(config-if)#ip address 182.97.6.222 255.255.255.252
+Estate(config-if)#no shut
+Estate(config-if)#exit
+
+Router>en
+Router#conf t
+Router(config)#hostname Backup
+Backup(config)#Interface se0/0/1
+Backup(config-if)#ip address 182.97.6.225 255.255.255.252
+Backup(config-if)#no shut
+Backup(config-if)#exit
+Backup(config)#Interface se0/0/0
+Backup(config-if)#ip address 182.97.6.229 255.255.255.252
+Backup(config-if)#no shut
+Backup(config-if)#exit
+Backup(config)#Interface Serial0/3/0
+Backup(config-if)#ip address 182.97.6.221 255.255.255.252
+Backup(config-if)#no shut
+Backup(config-if)#exit
+Backup(config)#Interface Serial0/3/1
+Backup(config-if)#ip address 182.97.6.217 255.255.255.252
+Backup(config-if)#no shut
+Backup(config-if)#exit
+Backup#show run
