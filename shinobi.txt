@@ -1,0 +1,244 @@
+Routes: 
+L<>Sa ok
+L<>C ok
+L<>M ok
+L<>So ok
+L<>R ok
+Sa<>C ok
+Sa<>M ok
+Sa<>So ok
+Sa<>M<>R ok
+C<>M ok
+C<>M<>So ok
+C<>R ok
+M<>So ok
+M<>R ok
+So<>M<>R ok
+A<>B ok 
+
+
+
+Backup Router:
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ip route 128.10.20.0 255.255.252.0 Serial3/0
+Router(config)#ip route 128.10.24.0 255.255.252.0 Serial2/0
+Backup(config)#ip route 128.10.28.0 255.255.255.0 Se5/0
+Backup(config)#ip route 128.10.29.0 255.255.255.0 Se7/0
+Backup(config)#ip route 128.10.30.0 255.255.255.224 Se4/0
+Backup(config)#ip route 128.10.16.0 255.255.252.0 Se8/0
+Backup(config)#ip route 128.10.32.0 255.255.255.224 Se6/0
+Backup(config)#interface Serial4/0
+Backup(config-if)#ip address 128.10.30.94 255.255.255.252
+Backup(config-if)#no shut
+Backup(config-if)#exit
+Backup(config)#interface Serial5/0
+Backup(config-if)#ip address 128.10.30.89 255.255.255.252
+Backup(config-if)#ip address 128.10.30.89 255.255.255.252
+Backup(config-if)#no shut
+Backup(config-if)#exit
+Backup(config)#interface Serial6/0
+Backup(config-if)#ip address 128.10.30.105 255.255.255.252
+Backup(config-if)#no shut
+Backup(config)#ip route 128.10.30.32 255.255.255.224 Se6/0
+Backup(config)#interface Se8/0
+Backup(config-if)#ip address 128.10.30.102 255.255.255.252
+Backup(config-if)#no shut
+Backup(config)#ip route 128.10.30.32 255.255.255.224 Serial6/0
+
+Leaf Router:
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ip route 128.10.20.0 255.255.252.0 Serial3/0
+Leaf(config)#ip route 128.10.30.0 255.255.255.224 Se3/0
+Leaf(config)#ip route 128.10.28.0 255.255.255.0 Se3/0
+Leaf(config)#ip route 128.10.30.32 255.255.255.224 Se3/0
+Leaf(config)#ip route 128.10.16.0 255.255.252.0 Se3/0
+Leaf(config)#ip route 128.10.29.0 255.255.255.0 Se3/0
+
+Sand Router:
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ip route 128.10.20.0 255.255.252.0 Serial3/0
+Sand(config)#interface FastEthernet0/0
+Sand(config-if)#ip address 128.10.20.1 255.255.252.0
+Sand(config-if)#no shut
+Sand(config-if)#exit
+Sand(config)#ip route 128.10.16.0 255.255.252.0 Se2/0
+Sand(config)#ip route 128.10.29.0 255.255.255.0 Se2/0
+Sand(config)#int Se3/0
+Sand(config-if)#ip address 128.10.30.65 255.255.255.252
+Sand(config-if)#no shut
+Sand(config)#ip route 128.10.30.0 255.255.255.224 Se3/0
+Sand(config)#ip route 128.10.28.0 255.255.255.0 Se2/0
+Sand(config)#ip route 128.10.28.0 255.255.255.0 128.10.30.66 5 (floating)
+
+Rock Router:
+Router>enable
+Router#
+Router#configure terminal
+Router(config)#interface FastEthernet0/0
+Router(config-if)#ip address 128.10.30.1 255.255.255.224
+Rock(config-if)#no shut
+Rock(config-if)#exit
+Rock(config)#interface Serial3/0
+Rock(config-if)#ip address 128.10.30.93 255.255.255.252
+Rock(config-if)#no shut
+Rock(config-if)#exit
+Rock(config)#ip route 128.10.28.0 255.255.255.0 Se3/0
+Rock(config)#ip route 128.10.24.0 255.255.252.0 Se3/0
+Rock(config)#ip route 128.10.16.0 255.255.252.0 Se2/0
+Rock(config)#int Se2/0
+Rock(config-if)#ip address 128.10.30.70 255.255.255.252
+Rock(config-if)#no shut
+Rock(config)#ip route 128.10.20.0 255.255.255.252 Se2/0
+Rock(config)#ip route 128.10.29.0 255.255.255.252 Se2/0
+
+Cloud Router:
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface Serial2/0
+Router(config-if)#ip address 128.10.30.90 255.255.255.252
+Router(config-if)#no shut
+Router(config-if)#exit
+Router(config)#ip route 128.10.30.0 255.255.255.224 Serial2/0
+Cloud(config)#interface FastEthernet0/0
+Cloud(config-if)#ip address 128.10.28.1 255.255.255.0
+Cloud(config-if)#no shut
+Cloud(config)#ip route 128.10.20.0 255.255.252.0 Se2/0
+Cloud(config)#int Se3/0
+Cloud(config-if)#ip address 128.10.30.78 255.255.255.252
+Cloud(config-if)#no shut
+Cloud(config)#ip route 128.10.16.0 255.255.252.0 Se3/0
+Cloud(config)#ip route 128.10.29.0 255.255.255.0 Se3/0
+
+Akatsuki Router:
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface FastEthernet0/0
+Router(config-if)#ip address 128.10.30.33 255.255.255.224
+Router(config-if)#no shut
+Router(config-if)#exit
+Akatsuki(config)#ip route 0.0.0.0 0.0.0.0 Se2/0
+Akatsuki(config)#interface Serial2/0
+Akatsuki(config-if)#ip address 128.10.30.106 255.255.255.252
+Akatsuki(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial2/0, changed state to down
+Akatsuki(config-if)#exit
+
+Mist Router:(Dynamic)
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface F0/0
+Router(config-if)#ip address 128.10.16.1 255.255.252.0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#exit
+Router(config)#hostname Mist
+Mist(config)#router rip
+Mist(config-router)#version 2
+Mist(config-router)#no auto-summary
+Mist(config-router)#network 128.10.20.0
+Mist(config-router)#network 128.10.24.0
+Mist(config-router)#network 128.10.28.0
+Mist(config-router)#network 128.10.29.0
+Mist(config-router)#network 128.10.30.0
+Mist(config-router)#network 128.10.30.32
+Mist(config)#interface Se6/0
+Mist(config-if)#ip address 128.10.30.101 255.255.255.252
+Mist(config-if)#no shut
+
+Mist(config-if)#
+%LINK-5-CHANGED: Interface Serial6/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial6/0, changed state to up
+
+Mist(config-if)#exit
+Mist(config)#interface Se4/0
+Mist(config-if)#ip address 128.10.30.69 255.255.255.252
+Mist(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial4/0, changed state to down
+Mist(config-if)#exit
+Mist(config)#
+%LINK-5-CHANGED: Interface Serial4/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial4/0, changed state to up
+
+Mist(config)#int Se7/0
+Mist(config-if)#ip address 128.10.30.77 255.255.255.252
+Mist(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial7/0, changed state to down
+Mist(config-if)#
+%LINK-5-CHANGED: Interface Serial7/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial7/0, changed state to up
+
+Mist(config-if)#exit
+Mist(config)#int Se5/0
+Mist(config-if)#exit
+Mist(config)#
+Mist(config)#router rip
+Mist(config-router)#
+Mist(config-router)#exit
+Mist(config)#int Se2/0
+Mist(config-if)#ip address 128.10.30.74 255.255.255.252
+Mist(config-if)#no shut
+
+Mist(config-if)#
+%LINK-5-CHANGED: Interface Serial2/0, changed state to up
+
+Mist(config-if)#exit
+Mist(config)#int Se3/0
+Mist(config-if)#ip address 128.10.30.66 255.255.255.252
+Mist(config-if)#no shut
+
+Sound Router:
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#interface Fa0/0
+Router(config-if)#ip address 128.10.29.1 255.255.255.0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#exit
+Sound(config)#int Se3/0
+Sound(config-if)#ip address 128.10.30.97 255.255.255.252
+Sound(config-if)#no shut
+Sound(config)#ip route 128.10.16.0 255.255.252.0 Se2/0
+Sound(config)#ip route 128.10.24.0 255.255.252.0 Se3/0
+Sound(config)#ip route 128.10.20.0 255.255.252.0 Se3/0
+Sound(config)#ip route 128.10.30.0 255.255.255.224 Se2/0
+Sound(config)#ip route 128.10.28.0 255.255.255.0 Se2/0
+Sound(config)#int Se3/0
+Sound(config-if)#ip address 128.10.30.97 255.255.255.252
+Sound(config-if)#no shut
+
+
+Backup system:
+Sound(config)#ip route 0.0.0.0 0.0.0.0 Se3/0
+Mist(config)#ip route 0.0.0.0 0.0.0.0 Se6/0
+Cloud(config)#ip route 0.0.0.0 0.0.0.0 Se2/0
+Rock(config)#ip route 0.0.0.0 0.0.0.0 Se3/0
+Sand(config)#ip route 0.0.0.0 0.0.0.0 Se2/0
+Leaf(config)#ip route 0.0.0.0 0.0.0.0 Se3/0
